@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
 
@@ -52,7 +53,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
 
-    context 'with invalid attribures' do
+    context 'with invalid attributes' do
       it 'does not save the question' do
         expect { post :create, params: { question: attributes_for(:question, :invalid) } }.to_not change(Question, :count)
       end
