@@ -10,7 +10,6 @@ feature 'User can create question', %q{
   describe 'Authenticated user' do
     background do
       sign_in(user)
-
       visit questions_path
       click_on 'Ask question'
     end
