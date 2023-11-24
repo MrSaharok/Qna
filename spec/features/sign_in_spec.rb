@@ -26,4 +26,3 @@ feature 'User can sign in', %q{
     expect(page).to have_content 'Invalid Email or password.'
   end
 end
-
