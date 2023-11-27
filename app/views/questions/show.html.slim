@@ -1,21 +1,27 @@
-h1= @question.title
-p= @question.body
-- if current_user&.author_of?(@question)
-  p= link_to 'Delete question',
-          question_path(@question),
-          method: :delete,
-          data: { confirm: 'Are you sure?' }
+p
+  p
+    = @question.title
+  p
+    = @question.body
+  - if current_user&.author_of? @question
+    p
+      = link_to 'delete',
+              question_path(@question),
+              method: :delete,
+              :title => "Delete question"
+p
+  h2 Answers
+  - @question.answers.each do |answer|
+    p = answer.body
+    p
+      - if current_user&.author_of? answer
+        = link_to 'delete', [@question, answer], :method => :delete, :title => "Delete answer"
 
-h2 Answers
-- @question.answers.each do |answer|
-  div
-    -if answer.persisted?
-      p= answer.body
-      - if current_user&.author_of?(answer)
-        p= link_to 'Delete answer',
-                answer_path(answer),
-                method: :delete,
-                data: { confirm: 'Are you sure?' }
-
-- if current_user.present?
-  = render 'answers/form'
+  p
+    = form_for [@question, @answer] do |f|
+      - if @answer.errors.any?
+        - @answer.errors.full_messages.each do |msg|
+          p = msg
+      = f.label :body
+      = f.text_area :body
+      = f.submit 'Create answer'

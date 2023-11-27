@@ -1,10 +1,7 @@
-h3 Questions
-table
-  thead
-    tr
-      th Title
-      th Body
-  tbody
-    = render @questions
+div
+  - @question.each do |question|
+    p
+      = link_to question.title, question
+    p = question.body
 
 p= link_to 'Ask question', new_question_path

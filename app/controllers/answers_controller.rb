@@ -13,7 +13,8 @@ class AnswersController < ApplicationController
     @answer.user = current_user
 
     if @answer.save
-      redirect_to @question, notice: 'Your answer successfully created.'
+      flash[:notice] = 'Your answer successfully created'
+      redirect_to @question
     else
       @answers = @question.answers
       render 'questions/show'
@@ -21,7 +22,11 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy if current_user.author_of?(@answer)
+    if current_user.author_of? @answer
+      flash[:notice] = 'Your answer successfully deleted'
+      @answer.destroy
+    end
+
     redirect_to question_path
   end
 
@@ -36,6 +41,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:question).permit(:title, :body)
+    params.require(:answer).permit(:body)
   end
 end

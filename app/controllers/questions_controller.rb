@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = @question.answers.new
+    @answer = Answer.new(question: @question)
+    @answers = @question.answers
   end
 
   def new
@@ -18,11 +19,11 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user = current_user
+    @question = current_user.questions.new(question_params)
 
     if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
+      flash[:notice] = 'Your question successfully created'
+      redirect_to @question
     else
       render :new
     end
@@ -37,14 +38,18 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy if current_user.author_of?(@question)
-    redirect_to question_path
+    if current_user.author_of? @question
+      flash[:notice] = 'Your question successfully deleted'
+      @question.destroy
+    end
+
+    redirect_to questions_path
   end
 
   private
 
   def load_question
-    @questions = Question.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def question_params
