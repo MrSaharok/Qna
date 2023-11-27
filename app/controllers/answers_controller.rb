@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:new, :create]
-  before_action :load_answer, only: destroy
+  before_action :load_question, only: [:create]
+  before_action :load_answer, only: [:destroy]
 
 
   def new; end
@@ -15,13 +15,14 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to @question, notice: 'Your answer successfully created.'
     else
+      @answers = @question.answers
       render 'questions/show'
     end
   end
 
   def destroy
     @answer.destroy if current_user.author_of?(@answer)
-    redirect_to question_path(@answer.question)
+    redirect_to question_path
   end
 
   private
