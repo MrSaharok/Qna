@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Set best answer', %q{
+feature 'Best Answer', %q{
   In order to choose answer that is the best
   As an authenticated user
   I want to be able to set best answer for my question
@@ -22,25 +22,25 @@ feature 'Set best answer', %q{
     scenario 'set best answer' do
       within "#answer_#{answer.id}" do
         expect(page).not_to have_content 'Best answer:'
-        click_on 'Set best'
-        expect(page).to have_content 'Best answer:'
+        click_on 'Best Answer'
+        expect(page).to have_content 'Best Answer:'
       end
     end
 
     scenario 'set new answer as best' do
 
       within "div#answer_#{answers[-1].id}" do
-        click_on 'Set best'
+        click_on 'Best Answer'
       end
 
       within "div#answer_#{answers[0].id}" do
         click_on 'Set best'
-        expect(page).to_not have_content 'Set best'
+        expect(page).to_not have_content 'Best Answer'
       end
 
       answers[1, answers.size].each do |answer|
         within "div#answer_#{answer.id}" do
-          expect(page).to have_content 'Set best'
+          expect(page).to have_content 'Best Answer'
         end
       end
 
@@ -52,12 +52,12 @@ feature 'Set best answer', %q{
     sign_in user
     visit question_path(answer.question)
 
-    expect(page).to_not have_link 'Set best'
+    expect(page).to_not have_link 'Best Answer'
   end
 
   scenario "Unauthenticated user tries to set best answer" do
     visit question_path(answer.question)
 
-    expect(page).to_not have_link 'Set best'
+    expect(page).to_not have_link 'Best Answer'
   end
 end
