@@ -11,7 +11,7 @@
     .errors(style='display:none' id="errors_#{answer.id}")
       .edit_form(style='display:none' id="edit_form_#{answer.id}")
         = form_with model: answer, method: :put, local: false do |f|
-          = f.label :body, 'Respond'
+          = f.label :body
           = f.text_field :body, name: 'answer[body]'
           = f.submit 'Update'
 
