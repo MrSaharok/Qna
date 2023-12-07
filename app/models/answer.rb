@@ -1,15 +1,13 @@
 class Answer < ApplicationRecord
+  before_update :set_best
+
   belongs_to :question
   belongs_to :user
 
   validates :body, presence: true
 
-  default_scope { order(best: :desc).order(created_at: :asc) }
-
-  def set_best!
-    transaction do
-      question.answers.lock!.update_all(best: false)
-      update!(best: true)
-    end
+  def set_best
+      return unless best?
+      question.answers.where.not(id: id).update_all(best: false)
   end
 end

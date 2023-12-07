@@ -8,12 +8,12 @@ p
       = link_to 'delete',
               question_path(@question),
               method: :delete,
-              data: {confirm: 'Are you sure?'}
+              data: { confirm: 'Are you sure?' }
 p
   h2 Answers
   hr
   .answers
-    = render @question.answers
+    = render @question.answers.order(best: :desc)
 
   - if current_user.present?
     = render 'answers/form'
