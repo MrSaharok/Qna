@@ -1,33 +1,33 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:destroy]
+  before_action :load_question, only: %i[show new create]
+  before_action :load_answer, only: %i[show edit update destroy]
 
 
-  def new; end
+  def new
+    @answer = Answer.new
+  end
 
   def show; end
+
+  def edit; end
 
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-
-    if @answer.save
-      flash[:notice] = 'Your answer successfully created'
-      redirect_to @question
-    else
-      @answers = @question.answers
-      render 'questions/show'
-    end
+    @answer.save
   end
 
   def destroy
-    if current_user.author_of? @answer
-      flash[:notice] = 'Your answer successfully deleted'
-      @answer.destroy
-    end
+    @answer.destroy if current_user.author_of?(@answer)
+  end
 
-    redirect_to question_path
+  def update
+    @answer.update(answer_params)
+    respond_to do |format|
+      format.html { redirect_to question_path(@answer.question) }
+      format.js
+    end
   end
 
   private
@@ -41,6 +41,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, :best)
   end
 end
+

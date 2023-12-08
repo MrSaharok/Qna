@@ -1,26 +1,21 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_question, only: %i[show destroy edit ]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :load_question, only: %i[show edit destroy update ]
 
   def index
-    @question = Question.all
+    @questions = Question.all
   end
 
-  def show
-    @answer = Answer.new(question: @question)
-    @answers = @question.answers
-  end
+  def show; end
 
   def new
     @question = Question.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @question = current_user.questions.new(question_params)
-
     if @question.save
       flash[:notice] = 'Your question successfully created'
       redirect_to @question
@@ -30,10 +25,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
+    if current_user.author_of? @question
+      flash[:notice] = 'Your question successfully updated'
+      @question.update(question_params)
     end
   end
 

@@ -1,7 +1,6 @@
-div
-  - @question.each do |question|
-    p
-      = link_to question.title, question
-    p = question.body
-
+.questions
+  h2 Questions
+  hr
+  .question-errors
+  = render @questions
 p= link_to 'Ask question', new_question_path

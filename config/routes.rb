@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  root to: "questions#index"
 
   resources :questions do
-    resources :answers
+    resources :answers, shallow: true, except: %i[new index]
   end
-
-  root to: "questions#index"
 end
