@@ -3,9 +3,11 @@ p
     = @question.title
   p
     = @question.body
+
+  = render 'shared/attachments', resource: @question
+
   - if current_user&.author_of? @question
-    p
-      = link_to 'delete',
+    p= link_to 'delete',
               question_path(@question),
               method: :delete,
               data: { confirm: 'Are you sure?' }
