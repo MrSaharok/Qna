@@ -3,6 +3,9 @@
     - if answer.best?
       | Best answer:
     p= answer.body
+
+    = render 'shared/attachments', resource: answer
+
     - if show_best?(answer)
       = form_with model: answer, method: :put, remote: false do |f|
         = f.check_box :best, checked: true, hidden: true
@@ -25,6 +28,10 @@
       = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
         = f.label :body, 'Your answer'
         = f.text_field :body
+        br
+        = f.label :files
+        = f.file_field :files, multiple: true
+        br
         = f.submit 'Save'
 
     hr
