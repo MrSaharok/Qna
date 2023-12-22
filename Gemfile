@@ -62,3 +62,5 @@ gem 'rails-i18n'
 gem 'bootstrap', '~> 5.3.1'
 gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
+gem 'octokit', '~> 6.1'
+gem 'cocoon'
