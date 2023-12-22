@@ -3,6 +3,10 @@
     - if answer.best?
       | Best answer:
     p= answer.body
+    .links
+      p Links:
+      ul
+        = render 'shared/link', resource: answer
 
     = render 'shared/attachments', resource: answer
 
@@ -32,6 +36,10 @@
         = f.label :files
         = f.file_field :files, multiple: true
         br
-        = f.submit 'Save'
-
+        p Links:
+          #links
+            = f.fields_for :links do |l|
+            .add_link
+              = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+        = f.submit 'Save answer'
     hr
