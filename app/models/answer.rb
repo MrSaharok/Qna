@@ -12,8 +12,9 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   def set_best
-      return unless best?
+    transaction do
       question.answers.where.not(id: id).update_all(best: false)
       question.reward&.update!(user: user)
+    end
   end
 end
