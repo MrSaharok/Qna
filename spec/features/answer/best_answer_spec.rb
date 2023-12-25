@@ -8,7 +8,7 @@ feature 'Best Answer', %q{
 
   given(:author) { create(:user) }
   given(:user) { create(:user) }
-  given(:question) { create(:question, user: author) }
+  given!(:question) { create(:question, :with_reward, user: author) }
   given!(:answer) { create(:answer, question: question, user: author) }
   given!(:answers) { create_list(:answer, 4, question: question, user: author) }
 

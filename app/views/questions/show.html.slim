@@ -1,16 +1,17 @@
-p
-  p
-    = @question.title
-  p
-    = @question.body
+h1= @question.title
+p= @question.body
 
-  = render 'shared/attachments', resource: @question
+= render 'shared/attachments', resource: @question
 
-  - if current_user&.author_of? @question
-    p= link_to 'delete',
-              question_path(@question),
-              method: :delete,
-              data: { confirm: 'Are you sure?' }
+- if current_user&.author_of? @question
+  p= link_to 'delete',
+          question_path(@question),
+          method: :delete,
+          data: { confirm: 'Are you sure?' }
+.links
+  p Links:
+  ul
+    = render 'shared/link', resource: @question
 p
   h2 Answers
   hr
@@ -19,3 +20,13 @@ p
 
   - if current_user.present?
     = render 'answers/form'
+.answer-errors
+p Links
+  p
+    = f.fields_for :links do |l|
+      p
+        = l.label :name, 'Link name'
+        = l.text_field :name
+      p
+        = l.label :url
+        = l.text_field :url
