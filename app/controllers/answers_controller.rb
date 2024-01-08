@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!
   before_action :load_question, only: %i[show new create]
   before_action :load_answer, only: %i[show edit update destroy]
@@ -23,10 +25,9 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer.update(answer_params)
-    respond_to do |format|
-      format.html { redirect_to question_path(@answer.question) }
-      format.js
+    if current_user.author_of?(@answer)
+      @answer.update(answer_params)
+      @question = @answer.question
     end
   end
 
