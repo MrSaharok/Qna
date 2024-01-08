@@ -1,4 +1,6 @@
 class Answer < ApplicationRecord
+  include Votable
+
   before_update :set_best
 
   belongs_to :question

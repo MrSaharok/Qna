@@ -11,7 +11,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'jquery'
 import 'bootstrap'
-import "channels"
+import 'channels'
+import '../vote'
 require("../stylesheets/application.scss")
 
 Rails.start()
