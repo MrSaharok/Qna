@@ -8,6 +8,15 @@ p= @question.body
           question_path(@question),
           method: :delete,
           data: { confirm: 'Are you sure?' }
+
+div id ="question_#{@question.id}"
+  .comment-block
+    p Comments:
+    .comments
+      = render @question.comments
+    - if user_signed_in?
+      = render 'comments/form', resource: @question
+
 .links
   p Links:
   ul
