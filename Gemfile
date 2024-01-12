@@ -64,3 +64,5 @@ gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
 gem 'octokit', '~> 6.1'
 gem 'cocoon'
+gem 'gon'
+gem 'skim'
