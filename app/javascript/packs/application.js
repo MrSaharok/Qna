@@ -12,7 +12,11 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'jquery'
 import 'bootstrap'
 import 'channels'
+import 'skim'
 import '../vote'
+import '../answers'
+import '../comments'
+import '../questions'
 require("../stylesheets/application.scss")
 
 Rails.start()

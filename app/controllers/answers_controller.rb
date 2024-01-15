@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   before_action :load_question, only: %i[show new create]
   before_action :load_answer, only: %i[show edit update destroy]
 
+  after_action :publish_answer, only: :create
 
   def new
     @answer = Answer.new
@@ -43,6 +44,15 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:body, :best, files: [], links_attributes: [:name, :url, :_destroy])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    ActionCable.server.broadcast("question_#{@question.id}",
+                                 answer: @answer,
+                                 rating: @answer.rating,
+                                 links: @answer.links)
   end
 end
 

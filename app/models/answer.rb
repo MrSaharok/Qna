@@ -1,5 +1,6 @@
 class Answer < ApplicationRecord
   include Votable
+  include Commentable
 
   before_update :set_best
 
