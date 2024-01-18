@@ -1,48 +1,88 @@
 require 'rails_helper'
 
-Rspec.describe OauthCallbacksController, type: :controller do
+RSpec.describe OauthCallbacksController, type: :controller do
   before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
 
   describe 'Github' do
-    let(:oauth_data) { {'provider' => 'github', 'uid' => 123 } }
+    let(:oauth_data) { mock_auth_hash(:github, 'new@user.com') }
+    before { @request.env['omniauth.auth'] = mock_auth_hash(:github, 'new@user.com') }
 
-    it 'finds user from oauth data' do
-      allow(request.env).to receive(:[]).and_call_original
-      allow(request.env).to receive(:[]).with('omniauth.auth').and_return(oauth_data)
-      expect(User).to receive(:find_for_oauth).with(oauth_data)
-      get :github
-    end
-
-    context 'user exists' do
-      let!(:user) { create(:user) }
+    context 'user exist' do
+      let(:user) { Services::FindForOauth.call(oauth_data) }
 
       before do
-        allow(User).to receive(:find_for_oauth).and_return(user)
         get :github
       end
 
       it 'login user' do
         expect(subject.current_user).to eq user
       end
+
       it 'redirects to root path' do
-        expect(respinse).to redirect_to root_path
+        expect(response).to redirect_to root_path
       end
     end
 
-    context 'user does not exists' do
+    context 'user does not exist' do
+
       before do
-        allow(User).to receive(:find_for_oauth)
         get :github
       end
 
       it 'redirects to root path' do
-        expect(respinse).to redirect_to root_path
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'has no user email' do
+      before { @request.env['omniauth.auth'] = mock_auth_hash(:github, email: nil) }
+
+      it 'redirects to submit email form' do
+        get :github
+        expect(response).to redirect_to user_set_email_path
+      end
+    end
+  end
+
+  describe 'Vkontakte' do
+    let(:oauth_data) { mock_auth_hash(:vkontakte, 'new@user.com') }
+    before { @request.env['omniauth.auth'] = mock_auth_hash(:vkontakte, 'new@user.com') }
+
+    context 'user exist' do
+      let(:user) { Services::FindForOauth.call(oauth_data) }
+
+      before do
+        get :vkontakte
       end
 
-      it 'does not login user' do
-        exepct(subject.current_user).to_not be
+      it 'login user' do
+        expect(subject.current_user).to eq user
+      end
+
+      it 'redirects to root path' do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'user does not exist' do
+
+      before do
+        get :vkontakte
+      end
+
+      it 'redirects to root path' do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'has no user email' do
+      before { @request.env['omniauth.auth'] = mock_auth_hash(:vkontakte, email: nil) }
+
+      it 'redirects to submit email form' do
+        get :vkontakte
+        expect(response).to redirect_to user_set_email_path
       end
     end
   end
