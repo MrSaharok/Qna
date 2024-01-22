@@ -4,8 +4,9 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: %i[show new create]
   before_action :load_answer, only: %i[show edit update destroy]
-
   after_action :publish_answer, only: :create
+
+  authorize_resource
 
   def new
     @answer = Answer.new
