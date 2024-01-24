@@ -3,7 +3,7 @@ p= @question.body
 
 = render 'shared/attachments', resource: @question
 
-- if current_user&.author_of? @question
+- if can?(:destroy, @question)
   p= link_to 'delete',
           question_path(@question),
           method: :delete,
@@ -14,7 +14,7 @@ div id ="question_#{@question.id}"
     p Comments:
     .comments
       = render @question.comments
-    - if user_signed_in?
+    - if can?(:create, Comment)
       = render 'comments/form', resource: @question
 
 .links
@@ -27,7 +27,7 @@ p
   .answers
     = render @question.answers.order(best: :desc)
 
-  - if current_user.present?
+  - if can?(:create, Answer)
     = render 'answers/form'
 .answer-errors
 p Links

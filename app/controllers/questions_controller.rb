@@ -6,6 +6,8 @@ class QuestionsController < ApplicationController
 
   after_action :publish_question, only: :create
 
+  authorize_resource
+
   def index
     @questions = Question.all
   end
@@ -25,29 +27,23 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
-    @question = current_user.questions.new(question_params)
+    @question = Question.new(question_params)
+    @question.user = current_user
+
     if @question.save
       reward = @question.reward.present? ? ' with reward' : ' without reward'
-      flash[:notice] = 'Your question successfully created #{reward}'
-      redirect_to @question
+      redirect_to @question, notice: "Your question successfully created#{reward}"
     else
       render :new
     end
   end
 
   def update
-    if current_user.author_of? @question
-      flash[:notice] = 'Your question successfully updated'
-      @question.update(question_params)
-    end
+    @question.update(question_params) if current_user&.author_of?(@question)
   end
 
   def destroy
-    if current_user.author_of? @question
-      flash[:notice] = 'Your question successfully deleted'
-      @question.destroy
-    end
-
+    @question.destroy if current_user.author_of?(@question)
     redirect_to questions_path
   end
 
