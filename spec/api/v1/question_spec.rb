@@ -243,7 +243,7 @@ describe 'Questions API', type: :request do
 
           before { delete api_path, headers: headers, params: params }
 
-          it_behaves_like 'Request successful'
+          it_behaves_like 'Return successful'
 
           it 'delete the question from the database' do
             expect(Question.count).to eq 0
