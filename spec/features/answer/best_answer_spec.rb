@@ -29,7 +29,9 @@ feature 'Best Answer', %q{
 
     scenario 'set new answer as best' do
 
-      within "div#answer_#{answers[-1].id}" do
+      expect(page).to have_content 'Best answer:'
+
+      within "div#answer_#{answers.first.id}" do
         click_on 'Best Answer'
       end
 
