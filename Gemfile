@@ -52,6 +52,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'launchy'
   gem 'capybara-email'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -78,3 +79,5 @@ gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+gem 'mysql2'
+gem 'thinking-sphinx'
