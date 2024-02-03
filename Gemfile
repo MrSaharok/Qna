@@ -29,7 +29,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 4.1.0'
+  gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
 end
 
@@ -69,10 +69,10 @@ gem 'slim-rails'
 gem 'devise'
 gem 'pg'
 gem 'rails-i18n'
-gem 'bootstrap', '~> 5.3.1'
+gem 'bootstrap'
 gem 'jquery-rails'
 gem 'aws-sdk-s3', require: false
-gem 'octokit', '~> 6.1'
+#gem 'octokit', '~> 6.1'
 gem 'cocoon'
 gem 'gon'
 gem 'skim'
