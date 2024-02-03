@@ -86,3 +86,5 @@ gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
