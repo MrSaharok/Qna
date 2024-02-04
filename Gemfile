@@ -30,7 +30,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 6.0.0'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '6.4.0'
+  gem 'factory_bot', '6.4.4'
 end
 
 group :development do
@@ -86,6 +87,6 @@ gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
-gem 'dotenv'
-gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'mini_racer', '~> 0.3.1'
+gem 'net-http'
+gem 'uri', '0.10.0'
