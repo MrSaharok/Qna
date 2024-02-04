@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'rails_hepler'
 
 feature 'User can subscribe on the question', %q{
     In order to have information about new answers

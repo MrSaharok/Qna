@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   include Voted
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :load_question, only: %i[show edit destroy update ]
+  before_action :load_question, only: %i[show destroy update ]
   before_action :load_subscription, only: %i[show update]
   after_action :publish_question, only: :create
 
@@ -23,8 +23,6 @@ class QuestionsController < ApplicationController
     @question.links.new
     @question.build_reward
   end
-
-  def edit; end
 
   def create
     @question = Question.new(question_params)

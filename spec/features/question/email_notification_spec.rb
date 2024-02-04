@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'rails_hepler'
 
 feature 'User can receive email notifications about new answers', %q{
     In order to have information about new answers

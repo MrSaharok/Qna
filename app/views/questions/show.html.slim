@@ -1,11 +1,17 @@
-h1= @question.title
-p= @question.body
+- cache @question
+  h1= @question.title
+  p= @question.body
 
 .subscription
   - if can?(:create, Subscription)
     = render 'subscriptions/subscription', resource: @question
 
 = render 'shared/attachments', resource: @question
+
+.links
+  p Links:
+  ul
+    = render 'shared/link', resource: @question
 
 - if can?(:destroy, @question)
   p= link_to 'delete',
@@ -17,29 +23,15 @@ div id ="question_#{@question.id}"
   .comment-block
     p Comments:
     .comments
-      = render @question.comments
+      - if @question.comments.any?
+        = render 'comments/comment', resource: @question
     - if can?(:create, Comment)
       = render 'comments/form', resource: @question
 
-.links
-  p Links:
-  ul
-    = render 'shared/link', resource: @question
-p
+hr
+.answers
   h2 Answers
-  hr
-  .answers
-    = render @question.answers.order(best: :desc)
+  = render @question.answers
 
   - if can?(:create, Answer)
     = render 'answers/form'
-.answer-errors
-p Links
-  p
-    = f.fields_for :links do |l|
-      p
-        = l.label :name, 'Link name'
-        = l.text_field :name
-      p
-        = l.label :url
-        = l.text_field :url
