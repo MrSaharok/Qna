@@ -6,13 +6,13 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
- yandex:
-   service: S3
-   access_key_id: <%= ENV['ACCESS_KEY'] %>
-   secret_access_key: <%= ENV['SECRET_ACCESS_SECRET'] %>
-   bucket: <%= ENV['BUCKET'] %>
-   endpoint: 'https://storage.yandexcloud.net'
-   force_path_style: true
+yandex:
+  service: S3
+  access_key_id: <%= ENV['ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['SECRET_ACCESS_SECRET'] %>
+  bucket: <%= ENV['BUCKET'] %>
+  endpoint: 'https://storage.yandexcloud.net'
+  force_path_style: true
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
