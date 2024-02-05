@@ -1,4 +1,3 @@
-module Services
   class NewAnswerNotification
     def self.call(answer)
       answer.question.subscriptions.find_each do |subscription|
@@ -6,4 +5,3 @@ module Services
       end
     end
   end
-end

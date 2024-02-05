@@ -1,4 +1,3 @@
-module Services
   class FindForOauth
 
     def self.call(auth)
@@ -23,4 +22,3 @@ module Services
       user
     end
   end
-end

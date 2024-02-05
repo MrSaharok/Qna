@@ -1,4 +1,3 @@
-module Services
   class Search
 
     SCOPES = %w[thinking_sphinx user comment question answer].freeze
@@ -11,4 +10,3 @@ module Services
       klass.search(escaped_query)
     end
   end
-end

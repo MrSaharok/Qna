@@ -22,6 +22,8 @@ module Qna
 
     config.autoload_paths += [config.root.join('app')]
 
+    config.autoload_paths += Dir[config.root.join('app', 'services').to_s]
+
     config.generators do |g|
       g.test_framework :rspec,
                        view_specs: false,
