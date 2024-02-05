@@ -12,13 +12,13 @@ RSpec.describe ExternalServices::NewAnswerNotifier do
       expect(NewAnswerMailer).to receive(:new_notification).with(subscription.user, answer).and_call_original
     end
 
-    Services::NewAnswerNotification.call(answer)
+    NewAnswerNotification.call(answer)
   end
   context 'unsubscribed user' do
     let(:user) { create(:user) }
 
     it 'does not notification about new answer' do
-      Services::NewAnswerNotification.call(answer)
+      NewAnswerNotification.call(answer)
       expect(NewAnswerMailer).to_not receive(:new_notification).with(user, answer).and_call_original
     end
   end

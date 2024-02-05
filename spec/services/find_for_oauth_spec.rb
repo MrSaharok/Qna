@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Services::FindForOauth do
+RSpec.describe FindForOauth do
 
   let!(:user) { create(:user) }
   let!(:auth) { mock_auth_hash(:github, user.email) }
   let!(:user_auth) { create(:authorization, user:user) }
-  subject { Services::FindForOauth }
+  subject { FindForOauth }
 
   describe 'user already has authorization' do
     it 'returns the user' do
