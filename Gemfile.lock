@@ -151,6 +151,10 @@ GEM
     diff-lcs (1.5.1)
     doorkeeper (5.1.0)
       railties (>= 5)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.9.1)
     factory_bot (6.4.4)
@@ -460,6 +464,7 @@ DEPENDENCIES
   cocoon
   devise
   doorkeeper (= 5.1.0)
+  dotenv-rails
   factory_bot (= 6.4.4)
   factory_bot_rails (= 6.4.0)
   gon
