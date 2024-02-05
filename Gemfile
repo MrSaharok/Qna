@@ -88,6 +88,7 @@ gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+gem 'thinking-sphinx'
 gem 'mini_racer', '~> 0.3.1'
 gem 'net-http'
 gem 'uri', '0.10.0'
