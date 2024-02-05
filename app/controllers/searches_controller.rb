@@ -4,7 +4,7 @@ class SearchesController < ApplicationController
 
   def index
     if params[:query].present?
-      @results = Services::Search.call(query_params)
+      @results = Search.call(query_params)
     else
       render :index
     end

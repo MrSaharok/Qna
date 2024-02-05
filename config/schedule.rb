@@ -14,7 +14,7 @@
 # end
 #
 every 1.day do
-  runner "Services::DailyDigest.call"
+  runner "DailyDigest.call"
 end
 
 every 30.minutes do

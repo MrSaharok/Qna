@@ -4,10 +4,10 @@ RSpec.describe SearchesController, type: :controller do
   describe 'GET #index' do
 
     let!(:questions) { create_list(:question, 3) }
-    subject { Services::Search }
+    subject { Search }
 
     context 'with valid attributes' do
-      Services::Search::SCOPES.each do |scope|
+      Search::SCOPES.each do |scope|
         before do
           expect(subject).to receive(:call).and_return(questions)
           get :index, params: { query: questions.sample.title, scope: scope }
@@ -21,7 +21,7 @@ RSpec.describe SearchesController, type: :controller do
           expect(response).to render_template :index
         end
 
-        it "#{scope} assign Services::Search.call to @results" do
+        it "#{scope} assign Search.call to @results" do
           expect(assigns(:results)).to eq questions
         end
       end

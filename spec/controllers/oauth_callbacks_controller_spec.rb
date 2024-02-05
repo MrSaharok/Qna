@@ -10,7 +10,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
     before { @request.env['omniauth.auth'] = mock_auth_hash(:github, 'new@user.com') }
 
     context 'user exist' do
-      let(:user) { Services::FindForOauth.call(oauth_data) }
+      let(:user) { FindForOauth.call(oauth_data) }
 
       before do
         get :github
@@ -51,7 +51,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
     before { @request.env['omniauth.auth'] = mock_auth_hash(:vkontakte, 'new@user.com') }
 
     context 'user exist' do
-      let(:user) { Services::FindForOauth.call(oauth_data) }
+      let(:user) { FindForOauth.call(oauth_data) }
 
       before do
         get :vkontakte
