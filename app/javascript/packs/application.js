@@ -22,3 +22,6 @@ require("../stylesheets/application.scss")
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+var App = App || {};
+App.cable = ActionCable.createConsumer();
