@@ -8,6 +8,7 @@ set :repo_url, "git@github.com:MrSaharok/Qna.git"
 set :deploy_to, "/home/deployer/qna"
 set :deploy_user, 'deployer'
 set :branch, :main
+set :pty, false
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", 'config/master.key'
