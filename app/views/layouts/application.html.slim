@@ -9,7 +9,7 @@ html
     = Gon::Base.render_data
     = action_cable_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'app/javascript/packs/application.js', 'data-turbolinks-track': 'reload'
 
   body
     .navbar.navbar-default.navbar-static-top.bg-light
