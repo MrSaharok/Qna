@@ -21,5 +21,11 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@rails/webpacker": "^5.4.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "scripts":{
+    "dev":"SET NODE_OPTIONS=--openssl-legacy-provider",
+    "build":"SET NODE_OPTIONS=--openssl-legacy-provider",
+    "start":"SET NODE_OPTIONS=--openssl-legacy-provider",
+    "generate":"SET NODE_OPTIONS=--openssl-legacy-provider"
   }
 }
