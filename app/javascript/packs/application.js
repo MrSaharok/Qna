@@ -11,6 +11,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import 'channels'
 import 'jquery'
 import 'bootstrap'
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 //= require skim
 import '../vote'
 import '../answers'
