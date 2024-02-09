@@ -6,7 +6,6 @@
 server "80.78.242.152", user: "deployer", roles: %w{app db web}, primary: :true
 set :rail_env, :production
 
-set :sidekiq_config, -> { File.join(shared_path, 'config', 'sidekiq.yml') }
 
 # Custom SSH Options
 # ==================
