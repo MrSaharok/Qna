@@ -4,20 +4,22 @@
 // that code so it'll be compiled.
 
 require("@popperjs/core")
-
+global.$ = require("jquery")
 import Rails from "@rails/ujs"
+import {createConsumer} from "@rails/actioncable";
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import 'channels'
 import 'jquery'
 import 'bootstrap'
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
 //= require skim
 import '../vote'
 import '../answers'
 import '../comments'
 import '../questions'
+require("../stylesheets/application.scss")
+
+export default createConsumer()
 require("../stylesheets/application.scss")
 
 Rails.start()
