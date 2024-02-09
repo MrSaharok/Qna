@@ -21,4 +21,7 @@ every 30.minutes do
   runner "ts:index"
 end
 
+every :reboot do
+  rake "ts:start"
+end
 # Learn more: http://github.com/javan/whenever
