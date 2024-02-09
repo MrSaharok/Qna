@@ -1,0 +1,9 @@
+- if user_signed_in?
+  = current_user.email
+  p
+  = link_to 'Qna', questions_path, class: 'btn btn-secondary'
+  = link_to 'Sign out', destroy_user_session_path, method: :get, class: 'btn btn-secondary'
+  p
+- else
+  = link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary'
+  = link_to 'Sign up', new_user_registration_path, class: 'btn btn-secondary'

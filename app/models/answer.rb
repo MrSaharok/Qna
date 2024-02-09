@@ -16,9 +16,10 @@ class Answer < ApplicationRecord
 
   after_create :email_notification
 
-  def set_best
+  def set_best!
     transaction do
-      question.answers.where.not(id: id).update_all(best: false)
+      question.answers.lock!.update_all(best: false)
+      update!(best: true)
       question.reward&.update!(user: user)
     end
   end

@@ -10,14 +10,12 @@ import {createConsumer} from "@rails/actioncable";
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import 'channels'
-import 'jquery'
 import 'bootstrap'
 //= require skim
 import '../vote'
 import '../answers'
 import '../comments'
 import '../questions'
-require("../stylesheets/application.scss")
 
 export default createConsumer()
 require("../stylesheets/application.scss")
@@ -25,3 +23,16 @@ require("../stylesheets/application.scss")
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+document.addEventListener("turbolinks:load", () => {
+    // Both of these are from the Bootstrap 5 docs
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new Tooltip(tooltipTriggerEl)
+    })
+
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new Popover(popoverTriggerEl)
+    })
+})

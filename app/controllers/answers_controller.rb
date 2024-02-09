@@ -33,6 +33,10 @@ class AnswersController < ApplicationController
     end
   end
 
+  def set_best
+    @answer.set_best! if current_user&.author_of?(@answer.question)
+  end
+
   private
 
   def load_question

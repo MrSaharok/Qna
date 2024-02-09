@@ -1,13 +1,14 @@
 .answer-errors
-= render 'shared/errors', resource: @answer
+  = render 'shared/errors', resource: @answer
 
-- @answer ||= Answer.new
-= form_with model: [@question, @answer], local: false do |f|
+= form_with model: [@question, @answer], local: false, class: 'my-5' do |f|
   = f.label :body
   = f.text_field :body
   br
   = f.label :files
   = f.file_field :files, multiple: true
   br
-    = render 'shared/add_links', f: f
+
+  = render 'shared/add_links', f: f
+
   p= f.submit 'Create'

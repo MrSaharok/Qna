@@ -40,7 +40,9 @@ Rails.application.routes.draw do
 
   resources :questions, concerns: [:voted, :commented] do
     resources :subscriptions, only: %i[create destroy], shallow: true
-    resources :answers, concerns: [:voted, :commented], shallow: true, except: %i[new index]
+    resources :answers, concerns: [:voted, :commented], shallow: true do
+    patch :set_best, on: :member
+  end
   end
 
   resources :attachments, only: :destroy

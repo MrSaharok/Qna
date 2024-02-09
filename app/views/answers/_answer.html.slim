@@ -14,16 +14,9 @@
     = render 'shared/attachments', resource: answer
 
     - if show_best?(answer)
-      = form_with model: answer, method: :put, remote: false do |f|
-        = f.check_box :best, checked: true, hidden: true
-        = f.submit 'Best Answer'
-
-    .errors(style='display:none' id="errors_#{answer.id}")
-      .edit_form(style='display:none' id="edit_form_#{answer.id}")
-        = form_with model: answer, method: :put, local: false do |f|
-          = f.label :body
-          = f.text_field :body, name: 'answer[body]'
-          = f.submit 'Update'
+      p= link_to 'Set best', set_best_answer_path(answer),
+              remote: true,
+              method: :patch
 
     - if can?(:update, answer)
       p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
@@ -49,9 +42,9 @@
         = f.file_field :files, multiple: true
         br
         p Links:
-          #links
-            = f.fields_for :links do |l|
-            .add_link
-              = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
+        #links
+          = f.fields_for :links do |l|
+          .add_link
+            = link_to_add_association 'add link', f, :links, partial: 'shared/link_fields'
         = f.submit 'Save answer'
     hr
