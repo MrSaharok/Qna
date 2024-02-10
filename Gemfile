@@ -50,6 +50,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do
@@ -95,3 +96,4 @@ gem 'net-http'
 gem 'uri', '0.10.0'
 gem 'dotenv-rails'
 gem 'redis-rails', '>= 3'
+gem 'unicorn'
