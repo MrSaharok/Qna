@@ -10,6 +10,8 @@ set :deploy_user, 'deployer'
 set :branch, :main
 set :pty, false
 
+set :sidekiq_pid, '/tmp/pids/sidekiq.pid'
+
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", 'config/master.key'
 
